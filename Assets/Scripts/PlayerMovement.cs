@@ -6,44 +6,41 @@ public class PlayerMovement : Abilities
 {
     [field: SerializeField] private UnityEvent<float> OnVelocityChanged { get; set; }
 
-    [SerializeField] private float timeTillMaxSpeed;
     [SerializeField] private float maxSpeed;
     [SerializeField] private float acceleration;
+    [SerializeField] private float decelaration;
 
-    private float currentSpeed;
-    private float runTime;
+    private float currentVelocity;
+    private float direction;
 
     private void FixedUpdate()
     {
-        OnVelocityChanged?.Invoke(currentSpeed);
-        rb2d.velocity = new Vector2(currentSpeed, rb2d.velocity.y);
+        OnVelocityChanged?.Invoke(currentVelocity);
+        rb2d.velocity = new Vector2(currentVelocity * direction, rb2d.velocity.y);
     }
 
     public void MovePlayer(float horizontalInput)
     {
         if (horizontalInput != 0)
         {
-            acceleration = maxSpeed / timeTillMaxSpeed;
-            runTime += Time.deltaTime;
-            currentSpeed = horizontalInput * acceleration * runTime;
-            CheckSpeed();
+            if (horizontalInput != direction)
+                currentVelocity = 0f;
+
+            direction = horizontalInput;
         }
 
-        else
-        {
-            acceleration = 0;
-            runTime = 0;
-            currentSpeed = 0;
-        }
+        currentVelocity = CheckSpeed(horizontalInput);
     }
 
 
-    private void CheckSpeed()
+    private float CheckSpeed(float horizontalInput)
     {
-        if (currentSpeed > maxSpeed)
-            currentSpeed = maxSpeed;
+        if (Mathf.Abs(horizontalInput) > 0)
+            currentVelocity += acceleration * Time.deltaTime;
+        else
+            currentVelocity -= decelaration * Time.deltaTime;
 
-        else if (currentSpeed < -maxSpeed)
-            currentSpeed = -maxSpeed;
+        return Mathf.Clamp(currentVelocity, 0, maxSpeed);
+
     }
 }
