@@ -1615,9 +1615,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  maxSpeed: 5
-  acceleration: 25
-  decelaration: 30
+  movementStats: {fileID: 11400000, guid: cb291c3c697e13a449fa55643ba1b207, type: 2}
 --- !u!114 &1450764675
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3813,6 +3811,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1921214214}
+  - component: {fileID: 1921214219}
   - component: {fileID: 1921214218}
   - component: {fileID: 1921214217}
   - component: {fileID: 1921214215}
@@ -3832,7 +3831,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1921214213}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.694, y: -3.555, z: 0}
+  m_LocalPosition: {x: 3.39, y: 0.72, z: 0}
   m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children:
   - {fileID: 1783039408}
@@ -3905,9 +3904,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  maxSpeed: 4
-  acceleration: 10
-  decelaration: 10
+  movementStats: {fileID: 11400000, guid: 8c7a405740587fc4b9119f6a311fd9c7, type: 2}
 --- !u!114 &1921214218
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3950,6 +3947,19 @@ MonoBehaviour:
   collision:
     serializedVersion: 2
     m_Bits: 192
+--- !u!114 &1921214219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1921214213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33fe9e12bb19990438087337c421bf03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb2d: {fileID: 0}
 --- !u!1 &2060492587
 GameObject:
   m_ObjectHideFlags: 0

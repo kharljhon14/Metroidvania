@@ -5,10 +5,7 @@ using UnityEngine.Events;
 public class PlayerMovement : Abilities
 {
     [field: SerializeField] private UnityEvent<float> OnVelocityChanged { get; set; }
-
-    [SerializeField] private float maxSpeed;
-    [SerializeField] private float acceleration;
-    [SerializeField] private float decelaration;
+    [SerializeField] private MovementStats movementStats;
 
     private float currentVelocity;
     private float direction;
@@ -36,11 +33,11 @@ public class PlayerMovement : Abilities
     private float CheckSpeed(float horizontalInput)
     {
         if (Mathf.Abs(horizontalInput) > 0)
-            currentVelocity += acceleration * Time.deltaTime;
+            currentVelocity += movementStats.acceleration * Time.deltaTime;
         else
-            currentVelocity -= decelaration * Time.deltaTime;
+            currentVelocity -= movementStats.deceleration * Time.deltaTime;
 
-        return Mathf.Clamp(currentVelocity, 0, maxSpeed);
+        return Mathf.Clamp(currentVelocity, 0, movementStats.maxSpeed);
 
     }
 }

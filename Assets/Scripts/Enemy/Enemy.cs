@@ -3,19 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Enemy : MonoBehaviour
+public class Enemy : EnemyAbilities
 {
     [field: SerializeField] private UnityEvent<float> OnMoveInput { get; set; }
 
     [SerializeField] LayerMask collision;
-    private Collider2D col2d;
 
     private float moveDirection = 1f;
-
-    private void Awake()
-    {
-        col2d = GetComponent<Collider2D>();
-    }
 
     private void Update()
     {
@@ -39,12 +33,13 @@ public class Enemy : MonoBehaviour
 
     private void Move()
     {
-        if (CollisionCheck(Vector2.right, .5f, collision))
+        float distance = .5f;
+        if (CollisionCheck(Vector2.right, distance, collision))
         {
             moveDirection = -1f;
         }
 
-        if (CollisionCheck(Vector2.left, .5f, collision))
+        if (CollisionCheck(Vector2.left, distance, collision))
         {
             moveDirection = 1f;
         }
