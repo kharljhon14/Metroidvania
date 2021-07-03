@@ -16,7 +16,7 @@ public class PlayerMovement : Abilities
     private void FixedUpdate()
     {
         OnVelocityChanged?.Invoke(currentSpeed);
-        rigidbody2D.velocity = new Vector2(currentSpeed, rigidbody2D.velocity.y);
+        rb2d.velocity = new Vector2(currentSpeed, rb2d.velocity.y);
     }
 
     public void MovePlayer(float horizontalInput)

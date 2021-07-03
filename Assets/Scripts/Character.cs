@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
-    protected Collider2D collider2D;
-    protected Rigidbody2D rigidbody2D;
+    [HideInInspector] public Collider2D col2d;
+    [HideInInspector] public Rigidbody2D rb2d;
 
-    private void Start()
+    private void Awake()
     {
         Initialization();
     }
 
-    protected virtual void Initialization()
+    public virtual void Initialization()
     {
-        collider2D = GetComponent<Collider2D>();
-        rigidbody2D = GetComponent<Rigidbody2D>();
+        col2d = GetComponent<Collider2D>();
+        rb2d = GetComponent<Rigidbody2D>();
     }
 }

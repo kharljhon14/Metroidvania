@@ -6,7 +6,7 @@ public class Abilities : Character
 {
     protected Character character;
 
-    protected override void Initialization()
+    public override void Initialization()
     {
         base.Initialization();
         character = GetComponent<Character>();
