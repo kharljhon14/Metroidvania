@@ -9,14 +9,12 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] LayerMask collision;
     private Collider2D col2d;
-    private Rigidbody2D rb2d;
 
     private float moveDirection = 1f;
 
     private void Awake()
     {
         col2d = GetComponent<Collider2D>();
-        rb2d = GetComponent<Rigidbody2D>();
     }
 
     private void Update()
@@ -29,14 +27,13 @@ public class Enemy : MonoBehaviour
     {
         RaycastHit2D[] raycastHit2D = new RaycastHit2D[10];
         int numHits = col2d.Cast(direction, raycastHit2D, distance);
-        Debug.DrawRay(col2d.bounds.center, direction * distance, Color.red);
+
 
         for (int i = 0; i < numHits; i++)
         {
             if ((1 << raycastHit2D[i].collider.gameObject.layer & collision) != 0)
                 return true;
         }
-
         return false;
     }
 
@@ -47,7 +44,7 @@ public class Enemy : MonoBehaviour
             moveDirection = -1f;
         }
 
-       if(CollisionCheck(Vector2.left, .5f, collision))
+        if (CollisionCheck(Vector2.left, .5f, collision))
         {
             moveDirection = 1f;
         }
