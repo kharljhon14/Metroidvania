@@ -3,22 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class PlayerJump : MonoBehaviour
+public class PlayerJump : Abilities
 {
     [field: SerializeField] private UnityEvent OnGrounded { get; set; }
 
     [SerializeField] private float jumpForce;
     [SerializeField] private float hangTimeMax;
+    [SerializeField] private float jumpBufferMax;
 
     private GroundDetection groundDetection;
-    //Refactor later
-    private Rigidbody2D rb2d;
     private float hangTimer;
-
-    private void Awake()
-    {
-        rb2d = GetComponent<Rigidbody2D>();
-    }
+    private float jumpBufferTimer;
 
     private void Start()
     {
@@ -30,6 +25,14 @@ public class PlayerJump : MonoBehaviour
         OnGrounded?.Invoke();
         groundDetection.IsGrounded();
         GroundedTimer();
+        jumpBufferTimer -= Time.deltaTime;
+    }
+    
+    public void ResetJumpTimer()
+    {
+        jumpBufferTimer = jumpBufferMax;
+        if (jumpBufferTimer > 0)
+            Jump();
     }
 
     private void GroundedTimer()
@@ -40,18 +43,18 @@ public class PlayerJump : MonoBehaviour
         hangTimer -= Time.deltaTime;
     }
 
-    public void Jump()
+    private void Jump()
     {
         if (hangTimer > 0f)
         {
-            rb2d.velocity = new Vector2(rb2d.velocity.x, 0f);
-            rb2d.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, 0f);
+            rigidbody2D.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
     }
 
     public void SmallJump()
     {
-        if (rb2d.velocity.y > 0f)
-            rb2d.velocity = new Vector2(rb2d.velocity.x, rb2d.velocity.y * .4f);
+        if (rigidbody2D.velocity.y > 0f)
+            rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, rigidbody2D.velocity.y * .4f);
     }
 }

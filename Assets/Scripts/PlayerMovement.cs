@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : Abilities
 {
     [field: SerializeField] private UnityEvent<float> OnVelocityChanged { get; set; }
 
@@ -10,20 +10,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float maxSpeed;
     [SerializeField] private float acceleration;
 
-    private Rigidbody2D rb2d;
-
     private float currentSpeed;
     private float runTime;
-
-    private void Awake()
-    {
-        rb2d = GetComponent<Rigidbody2D>();
-    }
 
     private void FixedUpdate()
     {
         OnVelocityChanged?.Invoke(currentSpeed);
-        rb2d.velocity = new Vector2(currentSpeed, rb2d.velocity.y);
+        rigidbody2D.velocity = new Vector2(currentSpeed, rigidbody2D.velocity.y);
     }
 
     public void MovePlayer(float horizontalInput)
