@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5b54a91085b9c74c9bf641eb23275ea, type: 3}
   m_Name: Pig
   m_EditorClassIdentifier: 
-  maxSpeed: 3
-  acceleration: 10
-  deceleration: 20
+  maxSpeed: 2
+  acceleration: 50
+  deceleration: 50

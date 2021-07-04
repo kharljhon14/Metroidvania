@@ -1,23 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
-public class Enemy : EnemyAbilities
+public class Enemy : MonoBehaviour
 {
-    [field: SerializeField] private UnityEvent<float> OnMoveInput { get; set; }
+    protected Collider2D col2d;
+    [SerializeField] protected int rayHitNumber;
 
-    [SerializeField] LayerMask collision;
-
-    private float moveDirection = 1f;
-
-    private void Update()
+    private void Awake()
     {
-        OnMoveInput?.Invoke(moveDirection);
-        Move();
+        col2d = GetComponent<Collider2D>();
     }
 
-    private bool CollisionCheck(Vector2 direction, float distance, LayerMask collision)
+    protected virtual bool CollisionCheck(Vector2 direction, float distance, LayerMask collision)
     {
         RaycastHit2D[] raycastHit2D = new RaycastHit2D[10];
         int numHits = col2d.Cast(direction, raycastHit2D, distance);
@@ -31,17 +26,31 @@ public class Enemy : EnemyAbilities
         return false;
     }
 
-    private void Move()
+    protected virtual void CheckEdge()
     {
-        float distance = .5f;
-        if (CollisionCheck(Vector2.right, distance, collision))
+        Ray2D[] groundRays = new Ray2D[3];
+
+        groundRays[0].origin = new Vector2(col2d.bounds.min.x, col2d.bounds.center.y);
+        groundRays[1].origin = col2d.bounds.center;
+        groundRays[2].origin = new Vector2(col2d.bounds.max.x, col2d.bounds.center.y);
+
+        RaycastHit2D[] hits = new RaycastHit2D[3];
+        int numberOfHits = 0;
+        for (int i = 0; i < 3; i++)
         {
-            moveDirection = -1f;
+            Debug.DrawRay(groundRays[i].origin, -transform.up * .5f, Color.red);
+            hits[i] = Physics2D.Raycast(groundRays[i].origin, -transform.up, Mathf.Abs(transform.localScale.x * .5f));
         }
 
-        if (CollisionCheck(Vector2.left, distance, collision))
+        foreach (RaycastHit2D hit in hits)
         {
-            moveDirection = 1f;
+            if (hit)
+            {
+                numberOfHits++;
+            }
+            else
+                numberOfHits--;
         }
+        rayHitNumber = numberOfHits;
     }
 }

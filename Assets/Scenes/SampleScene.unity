@@ -3814,8 +3814,8 @@ GameObject:
   - component: {fileID: 1921214219}
   - component: {fileID: 1921214218}
   - component: {fileID: 1921214217}
-  - component: {fileID: 1921214215}
   - component: {fileID: 1921214216}
+  - component: {fileID: 1921214215}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -3831,15 +3831,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1921214213}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.39, y: 0.72, z: 0}
+  m_LocalPosition: {x: -6.735, y: 1.441, z: 0}
   m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children:
   - {fileID: 1783039408}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!70 &1921214215
-CapsuleCollider2D:
+--- !u!61 &1921214215
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -3851,9 +3851,19 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.001383543, y: -0.03182459}
-  m_Size: {x: 0.7296891, y: 0.8699355}
-  m_Direction: 0
+  m_Offset: {x: -0.009103298, y: -0.05332601}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.72967434, y: 0.76536536}
+  m_EdgeRadius: 0
 --- !u!50 &1921214216
 Rigidbody2D:
   serializedVersion: 4
@@ -3873,7 +3883,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!114 &1921214217
 MonoBehaviour:
@@ -3917,6 +3927,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01d66e0b5647d7548ba41e058b05e1e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rayHitNumber: 0
   <OnMoveInput>k__BackingField:
     m_PersistentCalls:
       m_Calls:
@@ -3944,6 +3955,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  isFacingLeft: 0
+  canTurnAroundCollider: 1
+  canTurnAroundEdge: 1
+  canChasePlayer: 0
+  canJump: 0
+  originalWaitTime: 0.2
   collision:
     serializedVersion: 2
     m_Bits: 192
@@ -3956,10 +3973,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1921214213}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33fe9e12bb19990438087337c421bf03, type: 3}
+  m_Script: {fileID: 11500000, guid: 2217e7bbcc2955841b7124bc70f24945, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb2d: {fileID: 0}
+  rayHitNumber: 0
 --- !u!1 &2060492587
 GameObject:
   m_ObjectHideFlags: 0
