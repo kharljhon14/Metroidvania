@@ -12,6 +12,8 @@ public class EnemyBrain : Enemy
     private float currentVelocity;
 
     [HideInInspector] public bool canChasePlayer;
+    [HideInInspector] public bool isFacingLeft;
+
 
     [Header("Enemy Flags")]
     [SerializeField] private bool spawnFacingLeft;
@@ -26,7 +28,6 @@ public class EnemyBrain : Enemy
     [SerializeField] LayerMask collision;
     [SerializeField] private float minDistance;
 
-    protected bool isFacingLeft;
     protected Transform player;
 
 

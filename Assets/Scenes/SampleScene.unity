@@ -3912,6 +3912,7 @@ MonoBehaviour:
         m_CallState: 2
   movementStats: {fileID: 11400000, guid: 8c7a405740587fc4b9119f6a311fd9c7, type: 2}
   canChasePlayer: 1
+  isFacingLeft: 0
   spawnFacingLeft: 0
   canTurnAroundCollider: 1
   canTurnAroundEdge: 0
@@ -3947,6 +3948,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdaf40d67b469aa468601b6dc6c33cdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rayHitNumber: 0
+  type: 0
+  distance: 5
+  detectionOffset: {x: -3, y: 0}
   followPlayerIfFound: 1
   radius: 2
   whatIsPlayer:
