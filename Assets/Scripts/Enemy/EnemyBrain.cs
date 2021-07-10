@@ -40,12 +40,13 @@ public class EnemyBrain : Enemy
     private void Update()
     {
         OnMoveInput?.Invoke(moveDirection);
+        CheckFloorEdge();
+        CheckEdge(collision);
     }
 
     private void FixedUpdate()
     {
-        CheckFloorEdge();
-        CheckEdge();
+
         HandleWait();
         Move();
         Jump();
@@ -77,6 +78,7 @@ public class EnemyBrain : Enemy
             if (timeTillDoAction <= 0f)
             {
                 rb2d.AddForce(Vector2.up * 15, ForceMode2D.Impulse);
+                timeTillDoAction = originalTimeTillDoAction;
 
                 if (isFacingLeft)
                     rb2d.velocity = new Vector2(-5, rb2d.velocity.y);
@@ -100,7 +102,7 @@ public class EnemyBrain : Enemy
 
     private void CheckFloorEdge()
     {
-        if (rayHitNumber == 2 && canTurnAroundEdge && !isWaiting)
+        if (rayHitNumber == 1 && canTurnAroundEdge && !isWaiting)
         {
             isWaiting = true;
             currentTimer = originalWaitTime;
