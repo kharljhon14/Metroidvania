@@ -10,7 +10,6 @@ public class EnemyBrain : Enemy
 
     [Header("Enemy Flags")]
     [SerializeField] private bool spawnFacingLeft;
-    [SerializeField] protected bool isFacingLeft;
     [SerializeField] private bool canTurnAroundCollider;
     [SerializeField] private bool canTurnAroundEdge;
     [SerializeField] private bool canChasePlayer;
@@ -21,6 +20,10 @@ public class EnemyBrain : Enemy
     [SerializeField] private float originalTimeTillDoAction;
 
     [SerializeField] LayerMask collision;
+    [SerializeField] private float minDistance;
+
+    protected bool isFacingLeft;
+    protected Transform player;
 
     private float moveDirection = 1f;
     private float currentTimer;
@@ -33,6 +36,7 @@ public class EnemyBrain : Enemy
         if (spawnFacingLeft)
             isFacingLeft = true;
 
+        player = FindObjectOfType<Character>().transform;
         currentTimer = originalWaitTime;
         timeTillDoAction = originalTimeTillDoAction;
     }
@@ -42,12 +46,12 @@ public class EnemyBrain : Enemy
         OnMoveInput?.Invoke(moveDirection);
         CheckFloorEdge();
         CheckEdge(collision);
+        HandleWait();
+        FollowPlayer();
     }
 
     private void FixedUpdate()
     {
-
-        HandleWait();
         Move();
         Jump();
     }
@@ -58,14 +62,14 @@ public class EnemyBrain : Enemy
         if (isFacingLeft)
         {
             moveDirection = -1f;
-            if (CollisionCheck(Vector2.left, distance, collision) && canTurnAroundCollider && !isJumping)
+            if (CollisionCheck(Vector2.left, distance, collision) && canTurnAroundCollider && !isJumping || (canChasePlayer && player.transform.position.x > transform.position.x))
                 isFacingLeft = false;
         }
 
         else
         {
             moveDirection = 1f;
-            if (CollisionCheck(Vector2.right, distance, collision) && canTurnAroundCollider && !isJumping)
+            if (CollisionCheck(Vector2.right, distance, collision) && canTurnAroundCollider && !isJumping || (canChasePlayer && player.transform.position.x < transform.position.x))
                 isFacingLeft = true;
         }
     }
@@ -77,21 +81,29 @@ public class EnemyBrain : Enemy
             timeTillDoAction -= Time.deltaTime;
             if (timeTillDoAction <= 0f)
             {
-                rb2d.AddForce(Vector2.up * 15, ForceMode2D.Impulse);
+                isJumping = true;
                 timeTillDoAction = originalTimeTillDoAction;
+                Invoke("NolongerInAir", .5f);
 
-                if (isFacingLeft)
-                    rb2d.velocity = new Vector2(-5, rb2d.velocity.y);
-                else
-                    rb2d.velocity = new Vector2(5, rb2d.velocity.y);
+                rb2d.AddForce(Vector2.up * 15, ForceMode2D.Impulse);
             }
         }
+    }
 
-        if (rayHitNumber > 0 && rb2d.velocity.y < 0)
+    private void FollowPlayer()
+    {
+        if (canChasePlayer)
         {
-            isJumping = true;
-            timeTillDoAction = originalTimeTillDoAction;
-            Invoke("NolongerInAir", .5f);
+            bool tooClose = new bool();
+            if (Mathf.Abs(transform.position.x - player.position.x) < minDistance)
+                tooClose = true;
+            else
+                tooClose = false;
+
+            if (tooClose)
+            {
+                rb2d.velocity = new Vector2(0, rb2d.velocity.y);
+            }
         }
     }
 

@@ -43,8 +43,8 @@ public class Enemy : MonoBehaviour
         RaycastHit2D[] hits = new RaycastHit2D[3];
         for (int i = 0; i < 3; i++)
         {
-            hits[i] = Physics2D.Raycast(groundRays[i].origin, -transform.up, .5f, groundLayer);
-            Debug.DrawRay(groundRays[i].origin, -transform.up * .5f, Color.blue);
+            hits[i] = Physics2D.Raycast(groundRays[i].origin, -transform.up, Mathf.Abs(transform.localScale.x * .6f), groundLayer);
+            Debug.DrawRay(groundRays[i].origin, -transform.up * Mathf.Abs(transform.localScale.x * .6f), Color.blue);
         }
         int numberOfHits = 0;
 

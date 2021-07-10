@@ -3801,7 +3801,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1921214213}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.83, y: 3.642, z: 0}
+  m_LocalPosition: {x: -3.52, y: -3.12, z: 0}
   m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children:
   - {fileID: 1783039408}
@@ -3901,9 +3901,9 @@ MonoBehaviour:
   <OnMoveInput>k__BackingField:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1921214217}
-        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
-        m_MethodName: MovePlayer
+      - m_Target: {fileID: 1783039411}
+        m_TargetAssemblyTypeName: PlayerRenderer, Assembly-CSharp
+        m_MethodName: FlipSprite
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3913,9 +3913,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1783039411}
-        m_TargetAssemblyTypeName: PlayerRenderer, Assembly-CSharp
-        m_MethodName: FlipSprite
+      - m_Target: {fileID: 1921214217}
+        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
+        m_MethodName: MovePlayer
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3929,16 +3929,16 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   spawnFacingLeft: 0
-  isFacingLeft: 0
   canTurnAroundCollider: 1
   canTurnAroundEdge: 1
-  canChasePlayer: 0
+  canChasePlayer: 1
   canJump: 0
   originalWaitTime: 0.6
   originalTimeTillDoAction: 2
   collision:
     serializedVersion: 2
     m_Bits: 192
+  minDistance: 2
 --- !u!114 &1921214219
 MonoBehaviour:
   m_ObjectHideFlags: 0
