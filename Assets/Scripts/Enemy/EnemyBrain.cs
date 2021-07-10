@@ -6,13 +6,17 @@ using UnityEngine.Events;
 public class EnemyBrain : Enemy
 {
     [field: SerializeField] private UnityEvent<float> OnMoveInput { get; set; }
-    [field: SerializeField] private UnityEvent OnJumpInput { get; set; }
+    [field: SerializeField] private UnityEvent<float> OnVelocityChanged { get; set; }
+    [SerializeField] private MovementStats movementStats;
+
+    private float currentVelocity;
+
+    [HideInInspector] public bool canChasePlayer;
 
     [Header("Enemy Flags")]
     [SerializeField] private bool spawnFacingLeft;
     [SerializeField] private bool canTurnAroundCollider;
     [SerializeField] private bool canTurnAroundEdge;
-    [SerializeField] private bool canChasePlayer;
     [SerializeField] private bool canJump;
 
     [Header("Timers")]
@@ -25,11 +29,13 @@ public class EnemyBrain : Enemy
     protected bool isFacingLeft;
     protected Transform player;
 
+
     private float moveDirection = 1f;
     private float currentTimer;
     private float timeTillDoAction;
     private bool isWaiting;
     private bool isJumping;
+    private bool tooClose;
 
     private void Start()
     {
@@ -54,6 +60,8 @@ public class EnemyBrain : Enemy
     {
         Move();
         Jump();
+        OnVelocityChanged?.Invoke(currentVelocity);
+        rb2d.velocity = new Vector2(currentVelocity * moveDirection, rb2d.velocity.y);
     }
 
     private void Move()
@@ -94,7 +102,6 @@ public class EnemyBrain : Enemy
     {
         if (canChasePlayer)
         {
-            bool tooClose = new bool();
             if (Mathf.Abs(transform.position.x - player.position.x) < minDistance)
                 tooClose = true;
             else
@@ -102,7 +109,7 @@ public class EnemyBrain : Enemy
 
             if (tooClose)
             {
-                rb2d.velocity = new Vector2(0, rb2d.velocity.y);
+                currentVelocity = 0f;
             }
         }
     }
@@ -130,5 +137,34 @@ public class EnemyBrain : Enemy
             isWaiting = false;
             currentTimer = 0;
         }
+    }
+
+
+    public void MovePlayer(float horizontalInput)
+    {
+        if (!tooClose)
+        {
+            if (horizontalInput != 0)
+            {
+                if (horizontalInput != moveDirection)
+                    currentVelocity = 0f;
+
+                moveDirection = horizontalInput;
+            }
+
+            currentVelocity = CheckSpeed(horizontalInput);
+        }
+    }
+
+
+    private float CheckSpeed(float horizontalInput)
+    {
+        if (Mathf.Abs(horizontalInput) > 0)
+            currentVelocity += movementStats.acceleration * Time.deltaTime;
+        else
+            currentVelocity -= movementStats.deceleration * Time.deltaTime;
+
+        return Mathf.Clamp(currentVelocity, 0, movementStats.maxSpeed);
+
     }
 }
