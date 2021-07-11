@@ -6,6 +6,7 @@ using UnityEngine.Events;
 public class Enemy : MonoBehaviour, IHitable
 {
     [field: SerializeField] public UnityEvent OnGetHit { get; set; }
+    [field: SerializeField] public UnityEvent OnGetDie { get; set; }
 
 
     [SerializeField] protected int rayHitNumber;
@@ -76,7 +77,9 @@ public class Enemy : MonoBehaviour, IHitable
             {
                 currentHealth = 0;
                 isDead = true;
-                Debug.Log("Dead");
+                OnGetDie?.Invoke();
+                rb2d.AddForce(Vector2.up * 15f, ForceMode2D.Impulse);
+                Destroy(gameObject, 1f);
             }
         }
     }

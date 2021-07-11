@@ -30,4 +30,9 @@ public class PlayerAnimation : MonoBehaviour
     {
         animator.SetBool("Chasing", isPlayerDetected);
     }
+
+    public void SetDeadAnimation()
+    {
+        animator.SetBool("Dead", true);
+    }
 }
