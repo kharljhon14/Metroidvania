@@ -7,14 +7,13 @@ public class EnemyBrain : Enemy
 {
     [field: SerializeField] private UnityEvent<float> OnMoveInput { get; set; }
     [field: SerializeField] private UnityEvent<float> OnVelocityChanged { get; set; }
-    [field: SerializeField] private UnityEvent<bool> OnPlayerDetected;
+    [field: SerializeField] private UnityEvent<bool> OnPlayerDetected { get; set; }
     [SerializeField] private MovementStats movementStats;
 
     private float currentVelocity;
 
     [HideInInspector] public bool canChasePlayer;
     [HideInInspector] public bool isFacingLeft;
-
 
     [Header("Enemy Flags")]
     [SerializeField] private bool spawnFacingLeft;
@@ -111,9 +110,7 @@ public class EnemyBrain : Enemy
                 tooClose = false;
 
             if (tooClose)
-            {
                 currentVelocity = 0f;
-            }
         }
         else
             tooClose = false;

@@ -18,7 +18,7 @@ public class PlayerDetector : Enemy
         enemyBrain = GetComponent<EnemyBrain>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         DetectPlayer();
     }

@@ -1,17 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour, IHitable
 {
+    [field: SerializeField] public UnityEvent OnGetHit { get; set; }
+
+
+    [SerializeField] protected int rayHitNumber;
+    [SerializeField] protected int maxHealth;
+
     protected Collider2D col2d;
     protected Rigidbody2D rb2d;
-    [SerializeField] protected int rayHitNumber;
+
+    private int currentHealth;
+    private bool isDead = false;
 
     private void Awake()
     {
         col2d = GetComponent<Collider2D>();
         rb2d = GetComponent<Rigidbody2D>();
+        currentHealth = maxHealth;
     }
 
     protected virtual bool CollisionCheck(Vector2 direction, float distance, LayerMask collision)
@@ -54,5 +64,20 @@ public class Enemy : MonoBehaviour
                 numberOfHits++;
         }
         rayHitNumber = numberOfHits;
+    }
+
+    public void GetHit(int damage, GameObject damageDealer)
+    {
+        if (!isDead)
+        {
+            Debug.Log("HIT");
+            currentHealth -= damage;
+            if(currentHealth <= 0)
+            {
+                currentHealth = 0;
+                isDead = true;
+                Debug.Log("Dead");
+            }
+        }
     }
 }
