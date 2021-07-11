@@ -7,6 +7,7 @@ public class EnemyBrain : Enemy
 {
     [field: SerializeField] private UnityEvent<float> OnMoveInput { get; set; }
     [field: SerializeField] private UnityEvent<float> OnVelocityChanged { get; set; }
+    [field: SerializeField] private UnityEvent<bool> OnPlayerDetected;
     [SerializeField] private MovementStats movementStats;
 
     private float currentVelocity;
@@ -51,6 +52,7 @@ public class EnemyBrain : Enemy
     private void Update()
     {
         OnMoveInput?.Invoke(moveDirection);
+        OnPlayerDetected?.Invoke(canChasePlayer);
         CheckFloorEdge();
         CheckEdge(collision);
         HandleWait();
@@ -113,6 +115,9 @@ public class EnemyBrain : Enemy
                 currentVelocity = 0f;
             }
         }
+        else
+            tooClose = false;
+
     }
 
     private void NolongerInAir()

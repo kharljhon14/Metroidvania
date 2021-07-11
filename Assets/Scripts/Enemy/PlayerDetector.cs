@@ -36,10 +36,7 @@ public class PlayerDetector : Enemy
                 hit = Physics2D.BoxCast(new Vector2(transform.position.x - col2d.bounds.extents.x - detectionOffset.x - (distance * .5f), col2d.bounds.center.y), new Vector2(distance, col2d.bounds.size.y + detectionOffset.y), 0, Vector2.zero, 0, whatIsPlayer);
 
             if (hit)
-            {
-                if (followPlayerIfFound)
-                    enemyBrain.canChasePlayer = true;
-            }
+                enemyBrain.canChasePlayer = true;
             else
                 enemyBrain.canChasePlayer = false;
         }
@@ -58,10 +55,11 @@ public class PlayerDetector : Enemy
     private void OnDrawGizmos()
     {
         col2d = GetComponent<Collider2D>();
+        SpriteRenderer sr = GetComponentInChildren<SpriteRenderer>();
         if (type == DetectionType.Rectangle)
         {
             Gizmos.color = Color.red;
-            if (transform.localScale.x > 0)
+            if (!sr.flipX)
             {
                 Gizmos.DrawWireCube(new Vector2(transform.position.x + col2d.bounds.extents.x + detectionOffset.x + (distance * .5f), col2d.bounds.center.y + detectionOffset.y), new Vector2(distance, col2d.bounds.size.y));
             }

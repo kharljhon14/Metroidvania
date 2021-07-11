@@ -25,4 +25,9 @@ public class PlayerAnimation : MonoBehaviour
     {
         animator.SetFloat("VelocityY", currentVelocity);
     }
+
+    public void SetChasingAnimation(bool isPlayerDetected)
+    {
+        animator.SetBool("Chasing", isPlayerDetected);
+    }
 }
