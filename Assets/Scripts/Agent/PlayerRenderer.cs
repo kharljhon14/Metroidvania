@@ -18,4 +18,9 @@ public class PlayerRenderer : MonoBehaviour
         else if (horizontalInput < 0)
             spriteRenderer.flipX = true;
     }
+
+    public void FlipSpriteY()
+    {
+        spriteRenderer.flipY = true;
+    }
 }

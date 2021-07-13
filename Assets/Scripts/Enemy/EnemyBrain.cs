@@ -30,7 +30,6 @@ public class EnemyBrain : Enemy
 
     protected Transform player;
 
-
     private float moveDirection = 1f;
     private float currentTimer;
     private float timeTillDoAction;
@@ -94,8 +93,7 @@ public class EnemyBrain : Enemy
                 isJumping = true;
                 timeTillDoAction = originalTimeTillDoAction;
                 Invoke("NolongerInAir", .5f);
-
-                rb2d.AddForce(Vector2.up * 15, ForceMode2D.Impulse);
+                AddForceVelocityY();
             }
         }
     }
@@ -142,7 +140,6 @@ public class EnemyBrain : Enemy
         }
     }
 
-
     public void MovePlayer(float horizontalInput)
     {
         if (!tooClose)
@@ -159,7 +156,6 @@ public class EnemyBrain : Enemy
         }
     }
 
-
     private float CheckSpeed(float horizontalInput)
     {
         if (Mathf.Abs(horizontalInput) > 0)
@@ -168,6 +164,10 @@ public class EnemyBrain : Enemy
             currentVelocity -= movementStats.deceleration * Time.deltaTime;
 
         return Mathf.Clamp(currentVelocity, 0, movementStats.maxSpeed);
+    }
 
+    public void AddForceVelocityY()
+    {
+        rb2d.AddForce(Vector2.up * 15, ForceMode2D.Impulse);
     }
 }
