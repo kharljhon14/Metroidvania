@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerRenderer : MonoBehaviour
+public class AgentRenderer : MonoBehaviour
 {
     private SpriteRenderer spriteRenderer;
 

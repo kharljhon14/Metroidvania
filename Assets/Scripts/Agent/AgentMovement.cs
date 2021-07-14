@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-public class PlayerMovement : Abilities
+public class AgentMovement : Abilities
 {
     [field: SerializeField] private UnityEvent<float> OnVelocityChanged { get; set; }
     [SerializeField] private MovementStats movementStats;
 
-    private float currentVelocity;
+    [HideInInspector] public float currentVelocity;
     private float direction;
 
     private void FixedUpdate()

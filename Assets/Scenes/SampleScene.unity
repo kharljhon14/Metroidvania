@@ -1550,7 +1550,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1450764669}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.1000004, y: -2.73, z: 0}
+  m_LocalPosition: {x: -5.79, y: 2.19, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1809418919}
@@ -1673,6 +1673,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   movementStats: {fileID: 11400000, guid: cb291c3c697e13a449fa55643ba1b207, type: 2}
+  currentVelocity: 0
 --- !u!114 &1450764675
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4042,10 +4043,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1921214213}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8334166e88787364782a77ca9cf7c73a, type: 3}
+  m_Script: {fileID: 11500000, guid: a76f86557cb53bd4ab230724d43ce879, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb2d: {fileID: 0}
   <OnGetHit>k__BackingField:
     m_PersistentCalls:
       m_Calls: []

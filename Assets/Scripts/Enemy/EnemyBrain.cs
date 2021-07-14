@@ -29,6 +29,7 @@ public class EnemyBrain : Enemy
     [SerializeField] private float minDistance;
 
     protected Transform player;
+    protected AgentMovement agentMovement;
 
     private float moveDirection = 1f;
     private float currentTimer;
@@ -45,6 +46,7 @@ public class EnemyBrain : Enemy
         player = FindObjectOfType<Character>().transform;
         currentTimer = originalWaitTime;
         timeTillDoAction = originalTimeTillDoAction;
+        agentMovement = GetComponent<AgentMovement>();
     }
 
     private void Update()

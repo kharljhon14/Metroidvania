@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class Enemy : MonoBehaviour
 {
     protected Collider2D col2d;
-    public Rigidbody2D rb2d;
+    [HideInInspector] public Rigidbody2D rb2d;
     protected int rayHitNumber;
 
     private void Awake()
