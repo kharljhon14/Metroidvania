@@ -15,7 +15,9 @@ public class EnemyDamage : MonoBehaviour
         if(collision.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
             IHitable hitable = collision.GetComponent<IHitable>();
+            IKnockbackable knockbackable = collision.GetComponent<IKnockbackable>();
             hitable?.GetHit(1, gameObject);
+            knockbackable?.Knockback(Vector2.left, 10f, .2f);
         }
     }
 

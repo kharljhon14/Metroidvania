@@ -9,6 +9,7 @@ public class AgentMovement : Abilities
 
     [HideInInspector] public float currentVelocity;
     private float direction;
+    private bool isKnockback = false;
 
     private void FixedUpdate()
     {
@@ -40,4 +41,6 @@ public class AgentMovement : Abilities
         return Mathf.Clamp(currentVelocity, 0, movementStats.maxSpeed);
 
     }
+
+   
 }

@@ -1550,7 +1550,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1450764669}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.79, y: 2.19, z: 0}
+  m_LocalPosition: {x: 3.33, y: 0.58, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1809418919}
@@ -1775,7 +1775,22 @@ MonoBehaviour:
   <OnGetDie>k__BackingField:
     m_PersistentCalls:
       m_Calls: []
-  maxHealth: 1
+  <OnKnockback>k__BackingField:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1450764674}
+        m_TargetAssemblyTypeName: AgentMovement, Assembly-CSharp
+        m_MethodName: Knockback
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  maxHealth: 5
 --- !u!1 &1519955002
 GameObject:
   m_ObjectHideFlags: 0
@@ -4136,6 +4151,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  <OnKnockback>k__BackingField:
+    m_PersistentCalls:
+      m_Calls: []
   maxHealth: 1
 --- !u!114 &1921214218
 MonoBehaviour:
