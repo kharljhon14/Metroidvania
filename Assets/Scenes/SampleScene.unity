@@ -1775,21 +1775,6 @@ MonoBehaviour:
   <OnGetDie>k__BackingField:
     m_PersistentCalls:
       m_Calls: []
-  <OnKnockback>k__BackingField:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1450764674}
-        m_TargetAssemblyTypeName: AgentMovement, Assembly-CSharp
-        m_MethodName: Knockback
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
   maxHealth: 5
 --- !u!1 &1519955002
 GameObject:
@@ -4151,9 +4136,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  <OnKnockback>k__BackingField:
-    m_PersistentCalls:
-      m_Calls: []
   maxHealth: 1
 --- !u!114 &1921214218
 MonoBehaviour:

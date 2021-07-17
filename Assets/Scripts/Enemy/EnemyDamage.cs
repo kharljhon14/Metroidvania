@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyDamage : MonoBehaviour
 {
     private bool hit = false;
+    private float knockbackPower;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (hit)
@@ -17,7 +18,12 @@ public class EnemyDamage : MonoBehaviour
             IHitable hitable = collision.GetComponent<IHitable>();
             IKnockbackable knockbackable = collision.GetComponent<IKnockbackable>();
             hitable?.GetHit(1, gameObject);
-            knockbackable?.Knockback(Vector2.left, 10f, .2f);
+            if (transform.position.x > collision.transform.position.x)
+                knockbackPower = -10;
+            else
+                knockbackPower = 10;
+
+            knockbackable?.Knockback(Vector2.right, knockbackPower, .3f);
         }
     }
 

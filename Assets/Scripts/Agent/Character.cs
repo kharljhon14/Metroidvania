@@ -17,4 +17,5 @@ public class Character : MonoBehaviour
         col2d = GetComponent<Collider2D>();
         rb2d = GetComponent<Rigidbody2D>();
     }
+
 }

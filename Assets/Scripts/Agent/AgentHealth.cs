@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class AgentHealth : MonoBehaviour, IHitable, IKnockbackable
+public class AgentHealth : MonoBehaviour, IHitable
 {
     [field: SerializeField] public UnityEvent OnGetHit { get; set; }
     [field: SerializeField] public UnityEvent OnGetDie { get; set; }
@@ -30,10 +30,5 @@ public class AgentHealth : MonoBehaviour, IHitable, IKnockbackable
                 OnGetDie?.Invoke();
             }
         }
-    }
-
-    public void Knockback(Vector2 direction, float power, float duration)
-    {
-        
     }
 }
