@@ -10,7 +10,7 @@ public class AgentHealth : MonoBehaviour, IHitable
 
     [SerializeField] protected int maxHealth;
 
-    private int currentHealth;
+    [HideInInspector] public int currentHealth;
     private bool isDead = false;
     private void Awake()
     {
@@ -25,7 +25,6 @@ public class AgentHealth : MonoBehaviour, IHitable
             currentHealth -= damage;
             if (currentHealth <= 0)
             {
-                Debug.Log("Dead");
                 currentHealth = 0;
                 isDead = true;
                 OnGetDie?.Invoke();
