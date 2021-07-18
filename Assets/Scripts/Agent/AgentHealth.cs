@@ -21,6 +21,7 @@ public class AgentHealth : MonoBehaviour, IHitable
     {
         if (!isDead)
         {
+            OnGetHit?.Invoke();
             currentHealth -= damage;
             if (currentHealth <= 0)
             {

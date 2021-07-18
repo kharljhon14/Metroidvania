@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAnimation : MonoBehaviour
+public class AgentAnimation : MonoBehaviour
 {
     private Animator animator;
 
@@ -34,5 +34,10 @@ public class PlayerAnimation : MonoBehaviour
     public void SetDeadAnimation()
     {
         animator.SetBool("Dead", true);
+    }
+
+    public void SetHurtAnimation()
+    {
+        animator.SetTrigger("Hurt");
     }
 }
