@@ -20,6 +20,8 @@ public class EnemyBrain : Enemy
     [SerializeField] private bool canTurnAroundCollider;
     [SerializeField] private bool canTurnAroundEdge;
     [SerializeField] private bool canJump;
+    [SerializeField] private bool standStill;
+
 
     [Header("Timers")]
     [SerializeField] private float originalWaitTime;
@@ -63,8 +65,13 @@ public class EnemyBrain : Enemy
     {
         Move();
         Jump();
-        OnVelocityChanged?.Invoke(currentVelocity);
-        rb2d.velocity = new Vector2(currentVelocity * moveDirection, rb2d.velocity.y);
+        if (!standStill)
+        {
+            OnVelocityChanged?.Invoke(currentVelocity);
+            rb2d.velocity = new Vector2(currentVelocity * moveDirection, rb2d.velocity.y);
+
+
+        }
     }
 
     private void Move()
@@ -93,10 +100,17 @@ public class EnemyBrain : Enemy
             if (timeTillDoAction <= 0f)
             {
                 isJumping = true;
-                timeTillDoAction = originalTimeTillDoAction;
-                Invoke("NolongerInAir", .5f);
                 AddForceVelocityY();
+
+                timeTillDoAction = originalTimeTillDoAction;
+                if (isFacingLeft)
+                    rb2d.velocity = new Vector2(-5f, rb2d.velocity.y);
+                else
+                    rb2d.velocity = new Vector2(5f, rb2d.velocity.y);
+
+                Invoke("NolongerInAir", .5f);
             }
+
         }
     }
 
@@ -120,6 +134,11 @@ public class EnemyBrain : Enemy
     private void NolongerInAir()
     {
         isJumping = false;
+
+        if (standStill)
+        {
+            rb2d.velocity = new Vector2(0, rb2d.velocity.y);
+        }
     }
 
     private void CheckFloorEdge()
@@ -144,7 +163,7 @@ public class EnemyBrain : Enemy
 
     public void MovePlayer(float horizontalInput)
     {
-        if (!tooClose)
+        if (!tooClose || !standStill)
         {
             if (horizontalInput != 0)
             {

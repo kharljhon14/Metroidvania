@@ -19,9 +19,9 @@ public class EnemyDamage : MonoBehaviour
             IKnockbackable knockbackable = collision.GetComponent<IKnockbackable>();
             hitable?.GetHit(1, gameObject);
             if (transform.position.x > collision.transform.position.x)
-                knockbackPower = -10;
+                knockbackPower = -30;
             else
-                knockbackPower = 10;
+                knockbackPower = 30;
 
             knockbackable?.Knockback(Vector2.right, knockbackPower, .3f);
         }

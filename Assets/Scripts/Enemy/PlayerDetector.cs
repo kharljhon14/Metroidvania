@@ -35,17 +35,29 @@ public class PlayerDetector : Enemy
             else
                 hit = Physics2D.BoxCast(new Vector2(transform.position.x - col2d.bounds.extents.x - detectionOffset.x - (distance * .5f), col2d.bounds.center.y), new Vector2(distance, col2d.bounds.size.y + detectionOffset.y), 0, Vector2.zero, 0, whatIsPlayer);
 
-            if (hit)
-                enemyBrain.canChasePlayer = true;
+            if (followPlayerIfFound)
+            {
+                if (hit)
+                    enemyBrain.canChasePlayer = true;
+                else
+                    enemyBrain.canChasePlayer = false;
+            }
             else
                 enemyBrain.canChasePlayer = false;
+
         }
 
         if (type == DetectionType.Circle)
         {
             hit = Physics2D.CircleCast(transform.position, radius, Vector2.zero, 0f, whatIsPlayer);
-            if (hit)
-                enemyBrain.canChasePlayer = true;
+
+            if (followPlayerIfFound)
+            {
+                if (hit)
+                    enemyBrain.canChasePlayer = true;
+                else
+                    enemyBrain.canChasePlayer = false;
+            }
             else
                 enemyBrain.canChasePlayer = false;
         }

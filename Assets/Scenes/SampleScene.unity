@@ -565,8 +565,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   heartPrefab: {fileID: 5048431602081812085, guid: d77fed33b33a8be448d840f2f714725a, type: 3}
   heartContainer: {fileID: 2071283679}
-  heartFull: {fileID: 7524770952856964032, guid: 32d0a4dc6cb680f41b9d8a942c0f556a, type: 3}
-  heartEmpty: {fileID: -4821771753769038510, guid: 6b03a8fbec00efc4daa553423cb97935, type: 3}
   playerHealth: {fileID: 1450764677}
 --- !u!1 &1093980808
 GameObject:
@@ -2093,7 +2091,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  maxHealth: 5
+  maxHealth: 10
   currentHealth: 0
 --- !u!1 &1519955002
 GameObject:
@@ -4455,7 +4453,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  maxHealth: 1
+  maxHealth: 2
   currentHealth: 0
 --- !u!114 &1921214218
 MonoBehaviour:
@@ -4534,6 +4532,7 @@ MonoBehaviour:
   canTurnAroundCollider: 1
   canTurnAroundEdge: 1
   canJump: 0
+  standStill: 0
   originalWaitTime: 0.6
   originalTimeTillDoAction: 1
   collision:
@@ -4569,7 +4568,7 @@ MonoBehaviour:
   type: 0
   distance: 6
   detectionOffset: {x: -2.88, y: 0}
-  followPlayerIfFound: 1
+  followPlayerIfFound: 0
   radius: 2
   whatIsPlayer:
     serializedVersion: 2
