@@ -2091,7 +2091,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  maxHealth: 10
+  maxHealth: 3
   currentHealth: 0
 --- !u!1 &1519955002
 GameObject:
@@ -4296,7 +4296,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1921214213}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.82, y: -2.5, z: 0}
+  m_LocalPosition: {x: -5.82, y: 1.77, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1783039408}
@@ -4453,6 +4453,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1921214216}
+        m_TargetAssemblyTypeName: UnityEngine.Rigidbody2D, UnityEngine
+        m_MethodName: set_angularVelocity
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   maxHealth: 2
   currentHealth: 0
 --- !u!114 &1921214218
@@ -4565,10 +4577,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb2d: {fileID: 0}
-  type: 0
+  type: 1
   distance: 6
   detectionOffset: {x: -2.88, y: 0}
-  followPlayerIfFound: 0
+  followPlayerIfFound: 1
   radius: 2
   whatIsPlayer:
     serializedVersion: 2
